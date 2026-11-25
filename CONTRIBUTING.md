@@ -37,7 +37,7 @@ pytest tests/ -v
 - Follow PEP 8 conventions
 - Use explicit, descriptive variable names
 - Include docstrings for all public functions and classes
-- Keep the Tkinter GUI code in `abi_to_snp_analyzer_v1.1.0.py`
+- Keep the Tkinter GUI code in `abi_to_snp_analyzer_v1.1.2.py`
 - Place statistical logic in `population_genetics.py`
 - Place chromatogram helpers in `chromatogram.py`
 

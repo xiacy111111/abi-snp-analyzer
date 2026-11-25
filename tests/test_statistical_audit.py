@@ -163,10 +163,16 @@ class TestWC84Sanity(unittest.TestCase):
         structured = _structured_populations()
         fis, fst, fit = PopulationGenetics.compute_f_statistics(structured)
         self.assertIsNotNone(fst)
+        # WC84 variance components may be negative (heterozygote excess / no
+        # differentiation); hierfstat::wc reports signed F-statistics, so F_IS
+        # may legitimately be < 0.  Only F_ST / F_IT are bounded here, and F_ST
+        # must still detect the strong structure in this fixture.
         for value in (fis, fst, fit):
             self.assertIsNotNone(value)
-            self.assertGreaterEqual(value, 0.0)
             self.assertLessEqual(value, 1.0)
+        self.assertGreaterEqual(fis, -1.0)
+        self.assertGreaterEqual(fst, 0.0)
+        self.assertGreaterEqual(fit, 0.0)
         self.assertGreater(fst, 0.05)
         # panmictic-like populations (same frequencies, random genotypes)
         import random

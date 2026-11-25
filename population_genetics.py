@@ -403,17 +403,22 @@ class PopulationGenetics:
         if n_C <= 0.0:
             return 0.0, 0.0, 0.0, r, N
 
-        SSI = max(0.0, SST - SSP - SSW)   # among individuals within pops
+        # NOTE (v1.1.2): Weir-Cockerham variance components may legitimately
+        # be negative (e.g. b < 0 under heterozygote excess).  ``hierfstat::wc``
+        # — the reference WC84 implementation — does NOT truncate them.
+        # Clamping a/b/w to zero here biases F_ST/F_IS; keep the raw estimates
+        # and clip only the final ratios to [0, 1] in compute_f_statistics().
+        SSI = SST - SSP - SSW   # among individuals within pops (may be < 0)
 
         # Mean squares
         MSG = SSP / float(r - 1)
         MSI = SSI / float(N - r)
         MSW = SSW / float(N)
 
-        # Variance components (WC84)
-        a_comp = max(0.0, (MSG - MSI) / (2.0 * n_C))
-        b_comp = max(0.0, (MSI - MSW) / 2.0)
-        w_comp = max(0.0, MSW)
+        # Variance components (WC84) — untruncated, matching hierfstat::wc
+        a_comp = (MSG - MSI) / (2.0 * n_C)
+        b_comp = (MSI - MSW) / 2.0
+        w_comp = MSW
 
         return a_comp, b_comp, w_comp, r, N
 
@@ -487,12 +492,13 @@ class PopulationGenetics:
         Fis = total_b / (total_b + total_w) if (total_b + total_w) > 0.0 else 0.0
         Fit = (total_a + total_b) / sigma2_total
 
-        # Clamp to [0, 1]
-        Fst = max(0.0, min(1.0, Fst))
-        Fis = max(0.0, min(1.0, Fis))
-        Fit = max(0.0, min(1.0, Fit))
+        # NOTE (v1.1.2): F-statistics are ratios of variance components and can
+        # legitimately be negative (e.g. F_IS < 0 under heterozygote excess,
+        # or F_ST near zero when there is no differentiation).  ``hierfstat::wc``
+        # reports these signed values; truncating at zero would discard real
+        # information and bias the estimates.  Keep the signed estimates.
 
-        # Single-population: Fst and Fit not meaningful
+
         if n_valid_pops <= 1:
             return Fis, None, None
 
@@ -839,9 +845,15 @@ class PopulationGenetics:
         pop_sizes = {p: len(idx) for p, idx in pop_indices.items()}
 
         # --- SS(T) = (1 / 2N)  Σ_{i<j}  d_ij^2  (Excoffier et al. 1992 Eq. 1) ---
+        # NOTE: ``hap_distances`` already holds squared Euclidean distances:
+        # for biallelic loci the Hamming/pairwise-difference count IS the
+        # squared Euclidean distance (each differing locus contributes 1^2).
+        # Arlequin 3.5 therefore uses Σd/(2N) directly, without re-squaring.
+        # Re-squaring here (d^2) inflated among-population variance ~3x and
+        # biased Phi_ST high; use d as-is to match Arlequin's AMOVA.
         ss_total = (
             sum(
-                hap_distances[i][j] ** 2
+                hap_distances[i][j]
                 for i in range(n_hap)
                 for j in range(i + 1, n_hap)
             )
@@ -855,7 +867,7 @@ class PopulationGenetics:
             if nk > 1:
                 ss_within += (
                     sum(
-                        hap_distances[indices[a]][indices[b]] ** 2
+                        hap_distances[indices[a]][indices[b]]
                         for a in range(nk)
                         for b in range(a + 1, nk)
                     )

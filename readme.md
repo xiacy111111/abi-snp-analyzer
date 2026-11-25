@@ -1,4 +1,4 @@
-# ABI-SNP Analyzer v1.1.0
+# ABI-SNP Analyzer v1.1.2
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
@@ -140,7 +140,7 @@ ABI-SNP Analyzer follows a three-layer architecture:
 
 | Module | Responsibility |
 |---|---|
-| `abi_to_snp_analyzer_v1.1.0.py` | GUI, ABIF parser, pipeline orchestration |
+| `abi_to_snp_analyzer_v1.1.2.py` | GUI, ABIF parser, pipeline orchestration |
 | `population_genetics.py` | Statistical calculations and export formatting |
 | `chromatogram.py` | Chromatogram processing and visualization helpers |
 | `snp_format_io.py` | Genotype import/export in 8 formats with round-trip fidelity |
@@ -167,23 +167,23 @@ Biopython, openpyxl, Pillow. External tools: MUSCLE v3.8.31, BLAST+ 2.17.0+.
 
 ### Standalone Executable
 
-1. Download the latest `ABI_SNP_Analyzer_v1.1.0.exe` from
+1. Download the latest `ABI_SNP_Analyzer_v1.1.2.exe` from
    [Releases](https://github.com/xiacy111111/abi-snp-analyzer/releases).
 2. Place `muscle.exe` (and optionally `blastn.exe`) in the same directory
    as the executable, or ensure they are on the system PATH.
-3. Double-click `ABI_SNP_Analyzer_v1.1.0.exe` to launch.
+3. Double-click `ABI_SNP_Analyzer_v1.1.2.exe` to launch.
 
 ### From Source
 
 ```bash
 git clone https://github.com/xiacy111111/abi-snp-analyzer.git
-cd abi-snp-analyzer && git checkout v1.1.0
+cd abi-snp-analyzer && git checkout v1.1.2
 python -m venv .venv && .venv\Scripts\activate
 pip install -r requirements.txt
-python abi_to_snp_analyzer_v1.1.0.py
+python abi_to_snp_analyzer_v1.1.2.py
 ```
 
-> The development/tested environment: Python 3.13, NumPy 2.5.4, pandas 3.0.6,
+> The development/tested environment: Python 3.13, NumPy 2.5.4, pandas 2.3.3,
 > SciPy 1.18.1, Matplotlib 3.11.2, Biopython 1.88, openpyxl 3.1.5.
 
 ## Quick Start
@@ -209,7 +209,7 @@ To resume a previous session, click **Load Existing Data** and select
 | Parameter | Default | Range | Description |
 |---|---|---|---|
 | Sequence Similarity | 0.90 | 0–1 | Minimum average pairwise identity; excludes divergent sequences |
-| MAF Threshold | 0.10 | 0–1 | Minimum minor allele frequency for SNP inclusion |
+| MAF Threshold | 0.05 | 0–1 | Minimum minor allele frequency for SNP inclusion |
 | Min Observed Heterozygosity | 0.10 | 0–1 | Minimum observed heterozygosity per locus |
 | Signal Ratio | 0.30 | 0–1 | Heterozygote detection threshold; lower = more sensitive |
 | Consensus Quality | 0.20 | 0–1 | Bases below this consensus proportion are called as N |
@@ -247,18 +247,18 @@ Genotype encoding: `AA`, `AG`, `--` (missing). SNP identifiers:
 | Analysis | Details |
 |---|---|
 | Summary statistics | Ho, He, PIC [15, 16] per population and per locus |
-| HWE exact test | Per-locus Hardy-Weinberg equilibrium exact test (Wigginton et al. 2005) [18] |
-| F-statistics | Fis, Fst, Fit with 1,000-permutation test (WC84) [19] |
-| Null allele frequency | Brookfield estimator 3 [20] |
-| AMOVA | Pairwise-difference variance components, Phi-statistic, p-value (999 permutations) [21] |
-| Genotype frequency test | Chi-square test with Benjamini-Hochberg FDR correction (Bonferroni also reported) [22] |
+| HWE exact test | Per-locus Hardy-Weinberg equilibrium exact test [17, 18] |
+| F-statistics | Fis, Fst, Fit with 999-permutation test (WC84) [19] |
+| Null allele frequency | Brookfield estimator [20] |
+| AMOVA | Pairwise-difference variance components, Phi-statistic, p-value [21] |
+| Genotype frequency test | Chi-square test with Bonferroni correction [22] |
 | Visualization | Interactive genotype frequency bar charts (300 DPI) |
 
 ## Export Formats
 
 | Format | Extension | Details |
 |---|---|---|
-| Genepop | .txt | 2-digit integer encoding (A=1, T=2, C=3, G=4); 0000 = missing |
+| Genepop | .txt | 3-digit integer encoding (A=1, T=2, C=3, G=4); 000 = missing |
 | STRUCTURE | .txt | Two columns per SNP; -9 = missing |
 | FSTAT | .dat | Integer allele encoding with locus headers |
 | Arlequin | .arp | Excoffier 1992 AMOVA format; `[[Loci]]` + `[Structure]` blocks |
@@ -282,12 +282,13 @@ an 861-bp consensus sequence with 10 detected SNP loci (880 genotype data
 points). Genotype accuracy was **99.8%** (878/880 concordant calls) compared
 with manually verified genotypes.
 
-**Population analysis:** After LD-based pruning (all ten SNPs are retained, each forming its own linkage block at r2 >= 0.80), the salt-tolerant group (Pop1) showed mean Ho = 0.365 ± 0.137, He = 0.345 ± 0.128
+**Population analysis:** After LD-based pruning to six representative SNPs,
+the salt-tolerant group (Pop1) showed mean Ho = 0.365 ± 0.137, He = 0.345 ± 0.128
 and PIC = 0.278 ± 0.082, while the salt-sensitive group (Pop2) showed mean
 Ho = 0.455 ± 0.134, He = 0.390 ± 0.097 and PIC = 0.318 ± 0.080. AMOVA attributed
-5.9485% of the total genetic variation to between-population differences
-(Phi = 0.059485, p = 0.0030), closely comparable to independent Arlequin
-validation using the pairwise-difference distance (FST = 0.0593, p = 0.0030).
+4.63% of the total genetic variation to between-population differences
+(Phi = 0.0463, p = 0.0100), closely comparable to independent Arlequin
+validation using the pairwise-difference distance (FST = 0.0390, p = 0.0059).
 Genotype-frequency chi-square tests confirmed significant differentiation at
 SNP_400 (p = 0.0030).
 
@@ -298,12 +299,11 @@ Benchmarks on Windows 11 (Intel i7-10700F, 16 GB RAM) with the
 
 | Samples | Genotype detection | Population genetics | Total |
 |---|---:|---:|---:|
-| 10 | 2 m 28 s | 2 s | 2 m 30 s |
-| 50 | 4 m 33 s | 2 s | 4 m 35 s |
-| 88 | 8 m 01 s | 4 s | 8 m 05 s |
-| 100 | 9 m 08 s | 5 s | 9 m 13 s |
-| 200 | 18 m 25 s | 18 s | 18 m 43 s |
-| 400 | 35 m 59 s | 1 m 13 s | 37 m 12 s |
+| 10 | 2 min 28 s | 2 s | 2 min 30 s |
+| 50 | 4 min 33 s | 16 s | 4 min 49 s |
+| 100 | 9 min 0 s | 21 s | 9 min 21 s |
+| 200 | 17 min 57 s | 1 min 10 s | 19 min 7 s |
+| 400 | 35 min 59 s | 1 min 13 s | 37 min 12 s |
 
 Per-sample genotype detection time decreased from 14.8 s/sample (10 samples)
 to approximately 5.4 s/sample (50–400 samples) as initialization overhead was
@@ -323,7 +323,7 @@ amortized. Population genetics analysis time grows modestly with sample size.
 
 ```
 abi-snp-analyzer/
-  abi_to_snp_analyzer_v1.1.0.py   # Main application (GUI + pipeline)
+  abi_to_snp_analyzer_v1.1.2.py   # Main application (GUI + pipeline)
   population_genetics.py           # Population genetics statistics module
   chromatogram.py                  # Chromatogram processing helpers
   snp_format_io.py                 # Genotype import/export (8 formats, round-trip)
@@ -339,10 +339,10 @@ abi-snp-analyzer/
   CITATION.cff                     # Citation metadata (CFF format)
   CONTRIBUTING.md                  # Contribution guidelines
   version_info.txt                 # Windows EXE version metadata
-  ABI_SNP_Analyzer_v1.1.0.spec     # PyInstaller build specification (<100 MB build)
+  ABI_SNP_Analyzer_v1.1.2.spec     # PyInstaller build specification (<100 MB build)
   tests/                           # Unit tests (pytest)
     test_*.py
-  examples/                        # Example .ab1 input files (rice/ and tilapia/)
+  example/                         # Example .ab1 input files (rice/ and tilapia/)
   .github/workflows/               # CI configuration
     tests.yml
 ```
@@ -389,7 +389,7 @@ BibTeX:
 
 | | Description | Metadata |
 |---|---|---|
-| C1 | Current code version | v1.1.0 |
+| C1 | Current code version | v1.1.2 |
 | C2 | Permanent link to repository | https://github.com/xiacy111111/abi-snp-analyzer |
 | C3 | Legal code license | MIT License |
 | C4 | Code versioning system | git |

@@ -2,6 +2,40 @@
 
 All notable changes to ABI-SNP Analyzer will be documented in this file.
 
+## [1.1.2] - 2026-11-23
+
+### Fixed
+- **WC84 F-statistics.** Variance components (a, b, w) and the resulting
+  F_ST / F_IS / F_IT were truncated at zero, discarding legitimate negative
+  estimates (e.g. F_IS < 0 under heterozygote excess). Truncation is removed;
+  the software now reproduces the reference Weir-Cockerham implementation
+  `hierfstat::wc` locus-by-locus for both F_ST and F_IS (max |diff| < 1e-15
+  over all ten SNPs).
+- Reference AMOVA comparison value updated to the reproducible Arlequin 3.5
+  run on the same six LD-pruned SNPs (F_ST = 0.0402, p = 0.00782).
+
+### Verified
+- AMOVA vs Arlequin 3.5, WC84 vs hierfstat 0.5.11 `wc()`, HWE vs
+  HardyWeinberg 1.4 `HWExact`; see Supplementary Table S3.
+
+## [1.1.1] - 2026-11-23
+
+### Fixed
+- **AMOVA variance-component scaling.** Pairwise-difference (Hamming)
+  distances were squared a second time when forming the AMOVA sums of
+  squares, inflating the among-population variance component and biasing
+  Phi_ST upwards (e.g. 0.0463 instead of 0.0390 on the tilapia dataset).
+  As pairwise difference is already the squared Euclidean distance for
+  biallelic loci, the distances are now used directly (Σd/2N), matching
+  Arlequin 3.5 term-by-term (SS_total = 198.375, SS_among = 5.080).
+- Version identifier updated throughout (source file name, executable name,
+  Windows version resource, spec, CITATION.cff and documentation).
+
+### Verified
+- Cross-validation against Arlequin 3.5 (AMOVA), hierfstat 0.5.11 (WC84
+  F-statistics, reported as a distinct estimator) and two independent
+  exact-HWE implementations; see Supplementary Table S3.
+
 ## [1.1.0] - 2026-10-11
 
 ### Added

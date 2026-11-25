@@ -14,7 +14,7 @@ authors:
     given-names: Pengbo
     affiliation: "School of Life Science and Technology, Xidian University, Xi'an 710071, PR China"
     email: "pbning@xidian.edu.cn"
-version: 1.1.0
+version: 1.1.2
 date-released: 2026-10-12
 license: MIT
 url: "https://github.com/xiacy111111/abi-snp-analyzer"

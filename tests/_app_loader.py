@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Load the main application module (dotted file name) for unit tests.
 
-The main script is named ``abi_to_snp_analyzer_v1.1.0.py``; its dotted name
+The main script is named ``abi_to_snp_analyzer_v1.1.2.py``; its dotted name
 cannot be imported with a plain ``import`` statement, so it is loaded by file
 location.  Older test files referenced ``abi_to_snp_analyzer_v1_1``, which no
 longer exists.
@@ -21,7 +21,7 @@ os.makedirs(os.environ["MPLCONFIGDIR"], exist_ok=True)
 
 _TESTS_DIR = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT = os.path.dirname(_TESTS_DIR)
-_MAIN_SCRIPT = os.path.join(_PROJECT_ROOT, "abi_to_snp_analyzer_v1.1.0.py")
+_MAIN_SCRIPT = os.path.join(_PROJECT_ROOT, "abi_to_snp_analyzer_v1.1.2.py")
 _MODULE_NAME = "abi_snp_app_full"
 
 

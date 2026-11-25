@@ -17,7 +17,7 @@ import types
 import pytest
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAIN_SCRIPT = os.path.join(PROJECT_ROOT, "abi_to_snp_analyzer_v1.1.0.py")
+MAIN_SCRIPT = os.path.join(PROJECT_ROOT, "abi_to_snp_analyzer_v1.1.2.py")
 
 
 class _StubModule(types.ModuleType):

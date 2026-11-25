@@ -1,4 +1,4 @@
-# ABI-SNP Analyzer v1.1.0 用户操作手册
+# ABI-SNP Analyzer v1.1.2 用户操作手册
 
 ---
 
@@ -57,18 +57,18 @@ ABI-SNP Analyzer 是一款免费、开源的桌面应用程序，用于从 ABI �
 
 ### 3.1 独立可执行文件（推荐）
 
-1. 从 [GitHub Releases](https://github.com/xiacy111111/abi-snp-analyzer/releases) 下载 `ABI_SNP_Analyzer_v1.1.0.exe`。
+1. 从 [GitHub Releases](https://github.com/xiacy111111/abi-snp-analyzer/releases) 下载 `ABI_SNP_Analyzer_v1.1.2.exe`。
 2. 将 `muscle.exe`（以及可选的 `blastn.exe`）放入与 EXE 相同的文件夹。
-3. 双击 `ABI_SNP_Analyzer_v1.1.0.exe` 启动软件。
+3. 双击 `ABI_SNP_Analyzer_v1.1.2.exe` 启动软件。
 
 ### 3.2 从源代码运行
 
 ```bash
 git clone https://github.com/xiacy111111/abi-snp-analyzer.git
-cd abi-snp-analyzer && git checkout v1.1.0
+cd abi-snp-analyzer && git checkout v1.1.2
 python -m venv .venv && .venv\Scripts\activate
 pip install -r requirements.txt
-python abi_to_snp_analyzer_v1.1.0.py
+python abi_to_snp_analyzer_v1.1.2.py
 ```
 
 ---
@@ -225,10 +225,10 @@ python abi_to_snp_analyzer_v1.1.0.py
 | 数据概览 | 各群体样本数和位点数 |
 | 遗传多样性 | 观测杂合度 (Ho)、期望杂合度 (He)、多态信息含量 (PIC) |
 | Hardy-Weinberg 平衡检验 | 每个位点在每个群体中的 HWE 精确检验 p 值 [Guo & Thompson 1992; Wigginton et al. 2005] |
-| WC84 F-统计量 | Fis（群体内近交系数）、Fst（群体间分化系数）、Fit（总近交系数），含 1,000 次置换检验 [Weir & Cockerham 1984] |
-| 零等位基因频率 | Brookfield 估计量 3 [Brookfield 1996] |
+| WC84 F-统计量 | Fis（群体内近交系数）、Fst（群体间分化系数）、Fit（总近交系数），含 999 次置换检验 [Weir & Cockerham 1984] |
+| 零等位基因频率 | Brookfield 估计量 [Brookfield 1996] |
 | AMOVA | 分子方差分析，含 Phi-统计量和显著性 p 值 [Excoffier et al. 1992] |
-| 基因型频率卡方检验 | 群体间基因型频率差异检验，Benjamini-Hochberg FDR 校正 p 值（同时报告 Bonferroni 校正） |
+| 基因型频率卡方检验 | 群体间基因型频率差异检验，Bonferroni 校正 p 值 |
 | 交互式可视化 | 每个位点的基因型频率柱状图（支持 300 DPI PNG/PDF 保存） |
 | 结果汇总 | 所有统计结果汇总为 Excel 表格，包含原始 p 值和多重检验校正值 |
 
@@ -283,7 +283,7 @@ GenAlEx 文件示例（逗号分隔）：
 
 ```
 3,4,2,2,2
-"ABI-SNP Analyzer v1.1.0 - SNP genotypes | ALLELE_CODE:1=A,2=T,3=C,4=G",,,PopA,PopB
+"ABI-SNP Analyzer v1.1.2 - SNP genotypes | ALLELE_CODE:1=A,2=T,3=C,4=G",,,PopA,PopB
 Sample,Pop,SNP01,,SNP02,,SNP03,
 S01,PopA,1,1,1,2,0,0
 S02,PopA,1,2,0,0,1,1
@@ -377,4 +377,4 @@ A: 每次运行都会生成 `analysis_metadata.json` 文件，记录所有参数
 
 ---
 
-*ABI-SNP Analyzer v1.1.0 | MIT License | Copyright (c) 2026 Chengyu Xia, Wenhui Chu, Pengbo Ning*
+*ABI-SNP Analyzer v1.1.2 | MIT License | Copyright (c) 2026 Chengyu Xia, Wenhui Chu, Pengbo Ning*

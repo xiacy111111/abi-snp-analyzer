@@ -1,4 +1,4 @@
-# ABI-SNP Analyzer v1.1.0 — User Manual
+# ABI-SNP Analyzer v1.1.2 — User Manual
 
 ---
 
@@ -64,19 +64,19 @@ reference genome anchoring via BLASTN, and built-in population genetic analysis
 
 ### 3.1 Standalone Executable (Recommended)
 
-1. Download `ABI_SNP_Analyzer_v1.1.0.exe` from
+1. Download `ABI_SNP_Analyzer_v1.1.2.exe` from
    [GitHub Releases](https://github.com/xiacy111111/abi-snp-analyzer/releases).
 2. Place `muscle.exe` (and optionally `blastn.exe`) in the same folder.
-3. Double-click `ABI_SNP_Analyzer_v1.1.0.exe` to launch.
+3. Double-click `ABI_SNP_Analyzer_v1.1.2.exe` to launch.
 
 ### 3.2 Run from Source
 
 ```bash
 git clone https://github.com/xiacy111111/abi-snp-analyzer.git
-cd abi-snp-analyzer && git checkout v1.1.0
+cd abi-snp-analyzer && git checkout v1.1.2
 python -m venv .venv && .venv\Scripts\activate
 pip install -r requirements.txt
-python abi_to_snp_analyzer_v1.1.0.py
+python abi_to_snp_analyzer_v1.1.2.py
 ```
 
 ---
@@ -258,10 +258,10 @@ first asks how linked SNPs should be handled (§8.3) and then computes:
 | Data overview | Sample and locus counts per population |
 | Genetic diversity | Observed heterozygosity (Ho), expected heterozygosity (He), polymorphic information content (PIC) |
 | HWE exact test | Per-locus, per-population Hardy-Weinberg equilibrium exact test p-values [Guo & Thompson 1992; Wigginton et al. 2005] |
-| WC84 F-statistics | Fis (inbreeding coefficient), Fst (differentiation), Fit (total) with 1,000 permutation tests [Weir & Cockerham 1984] |
-| Null allele frequency | Brookfield estimator 3 [Brookfield 1996] |
+| WC84 F-statistics | Fis (inbreeding coefficient), Fst (differentiation), Fit (total) with 999 permutation tests [Weir & Cockerham 1984] |
+| Null allele frequency | Brookfield estimator [Brookfield 1996] |
 | AMOVA | Analysis of molecular variance with Phi-statistic and significance p-value [Excoffier et al. 1992] |
-| Genotype frequency chi-square | Inter-population genotype frequency difference test with Benjamini-Hochberg FDR-corrected p-values (Bonferroni also reported) |
+| Genotype frequency chi-square | Inter-population genotype frequency difference test with Bonferroni-corrected p-values |
 | Interactive visualization | Per-locus genotype frequency bar charts (300 DPI PNG/PDF export) |
 | Summary report | All statistical results in Excel format with raw and corrected p-values |
 
@@ -337,7 +337,7 @@ GenAlEx example (comma-delimited):
 
 ```
 3,4,2,2,2
-"ABI-SNP Analyzer v1.1.0 - SNP genotypes | ALLELE_CODE:1=A,2=T,3=C,4=G",,,PopA,PopB
+"ABI-SNP Analyzer v1.1.2 - SNP genotypes | ALLELE_CODE:1=A,2=T,3=C,4=G",,,PopA,PopB
 Sample,Pop,SNP01,,SNP02,,SNP03,
 S01,PopA,1,1,1,2,0,0
 S02,PopA,1,2,0,0,1,1
@@ -440,4 +440,4 @@ parameters and dependency versions for reproducibility.
 
 ---
 
-*ABI-SNP Analyzer v1.1.0 | MIT License | Copyright (c) 2026 Chengyu Xia, Wenhui Chu, Pengbo Ning*
+*ABI-SNP Analyzer v1.1.2 | MIT License | Copyright (c) 2026 Chengyu Xia, Wenhui Chu, Pengbo Ning*

@@ -39,9 +39,9 @@ def test_header_and_genome_named_locus(tmp_path):
         "s1": "CC", "s2": "CT", "s3": "--", "s4": "TT"}}
     lines = _write(tmp_path, ["s1", "s2", "s3", "s4"],
                    ["NC_031982.2:26437556C>T"], calls,
-                   source="ABI-SNP_Analyzer_v1.1.0")
+                   source="ABI-SNP_Analyzer_v1.1.2")
     assert lines[0] == "##fileformat=VCFv4.2"
-    assert "##source=ABI-SNP_Analyzer_v1.1.0" in lines
+    assert "##source=ABI-SNP_Analyzer_v1.1.2" in lines
     assert any(line.startswith("##contig=<ID=NC_031982.2>") for line in lines)
     header = [line for line in lines if line.startswith("#CHROM")][0]
     assert header.split("\t")[:9] == ["#CHROM", "POS", "ID", "REF", "ALT",

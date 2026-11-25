@@ -1,4 +1,4 @@
-# ABI-SNP Analyzer v1.1.0 — Python dependencies
+# ABI-SNP Analyzer v1.1.2 — Python dependencies
 numpy>=1.24
 pandas>=2.0
 scipy>=1.10

@@ -72,7 +72,7 @@ The exact versions pinned during development are recorded in `requirements.txt`.
 
 ## 4. Bundled Third-Party Libraries (in dist/)
 
-The standalone Windows executable (`dist/ABI_SNP_Analyzer_v1.1.0.exe`) is built
+The standalone Windows executable (`dist/ABI_SNP_Analyzer_v1.1.2.exe`) is built
 with PyInstaller and bundles runtime components from:
 
 - **Tcl/Tk** (BSD-style license) — GUI toolkit

@@ -1,8 +1,8 @@
 # UTF-8
 VSVersionInfo(
     ffi=FixedFileInfo(
-        filevers=(1, 1, 0, 0),
-        prodvers=(1, 1, 0, 0),
+        filevers=(1, 1, 2, 0),
+        prodvers=(1, 1, 2, 0),
         mask=0x3F,
         flags=0x0,
         OS=0x40004,
@@ -18,15 +18,15 @@ VSVersionInfo(
                     [
                         StringStruct("CompanyName", "Xidian University"),
                         StringStruct("FileDescription", "ABI-SNP Analyzer"),
-                        StringStruct("FileVersion", "1.1.0"),
+                        StringStruct("FileVersion", "1.1.2"),
                         StringStruct("InternalName", "ABI_SNP_Analyzer"),
                         StringStruct(
                             "LegalCopyright",
                             "Copyright (c) 2026 Chengyu Xia, Wenhui Chu, Pengbo Ning.",
                         ),
-                        StringStruct("OriginalFilename", "ABI_SNP_Analyzer_v1.1.0.exe"),
+                        StringStruct("OriginalFilename", "ABI_SNP_Analyzer_v1.1.2.exe"),
                         StringStruct("ProductName", "ABI-SNP Analyzer"),
-                        StringStruct("ProductVersion", "1.1.0"),
+                        StringStruct("ProductVersion", "1.1.2"),
                     ],
                 )
             ]
