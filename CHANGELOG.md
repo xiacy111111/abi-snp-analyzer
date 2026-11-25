@@ -16,7 +16,7 @@ All notable changes to ABI-SNP Analyzer will be documented in this file.
 
 ### Verified
 - AMOVA vs Arlequin 3.5, WC84 vs hierfstat 0.5.11 `wc()`, HWE vs
-  HardyWeinberg 1.4 `HWExact`; see Supplementary Table S3.
+  HardyWeinberg 1.4 `HWExact`; see Supplementary Table S2.
 
 ## [1.1.1] - 2026-11-23
 
@@ -34,7 +34,7 @@ All notable changes to ABI-SNP Analyzer will be documented in this file.
 ### Verified
 - Cross-validation against Arlequin 3.5 (AMOVA), hierfstat 0.5.11 (WC84
   F-statistics, reported as a distinct estimator) and two independent
-  exact-HWE implementations; see Supplementary Table S3.
+  exact-HWE implementations; see Supplementary Table S2.
 
 ## [1.1.0] - 2026-10-11
 
