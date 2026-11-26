@@ -2,7 +2,7 @@
 
 All notable changes to ABI-SNP Analyzer will be documented in this file.
 
-## [1.1.2] - 2026-11-23
+## [1.1.2] - 2026-11-16
 
 ### Fixed
 - **WC84 F-statistics.** Variance components (a, b, w) and the resulting
@@ -18,7 +18,7 @@ All notable changes to ABI-SNP Analyzer will be documented in this file.
 - AMOVA vs Arlequin 3.5, WC84 vs hierfstat 0.5.11 `wc()`, HWE vs
   HardyWeinberg 1.4 `HWExact`; see Supplementary Table S2.
 
-## [1.1.1] - 2026-11-23
+## [1.1.1] - 2026-11-16
 
 ### Fixed
 - **AMOVA variance-component scaling.** Pairwise-difference (Hamming)
